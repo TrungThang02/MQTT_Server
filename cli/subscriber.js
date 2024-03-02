@@ -2,15 +2,15 @@ const mqtt = require("mqtt");
 
 var mqttClient;
 
-// Change this to point to your MQTT broker or DNS name
 const mqttHost = "192.168.100.22";
 const protocol = "mqtt";
 const port = "1883";
+const username = "123";
+const password = "123";
 
 function connectToBroker() {
   const clientId = "client" + Math.random().toString(36).substring(7);
 
-  // Change this to point to your MQTT broker
   const hostURL = `${protocol}://${mqttHost}:${port}`;
 
   const options = {
@@ -21,6 +21,8 @@ function connectToBroker() {
     clean: true,
     reconnectPeriod: 1000,
     connectTimeout: 30 * 1000,
+    username: username,
+    password: password 
   };
 
   mqttClient = mqtt.connect(hostURL, options);
@@ -38,7 +40,6 @@ function connectToBroker() {
     console.log("Client connected:" + clientId);
   });
 
-  // Received Message
   mqttClient.on("message", (topic, message, packet) => {
     console.log(
       "Received Message: " + message.toString() + "\nOn topic: " + topic

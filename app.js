@@ -2,11 +2,10 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-// Serve Static Files
 app.use(express.static("public"));
 app.use("/assets", express.static("public"));
 
-// template view engine
+
 app.set("view engine", "ejs");
 
 // Set the json request body
